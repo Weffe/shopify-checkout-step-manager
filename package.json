@@ -1,6 +1,6 @@
 {
   "name": "shopify-checkout-step-manager",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index.js",
   "module": "dist/shopify-checkout-step-manager.esm.js",
   "typings": "dist/index.d.ts",
