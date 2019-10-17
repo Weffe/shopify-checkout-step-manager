@@ -1,12 +1,27 @@
 {
   "name": "shopify-checkout-step-manager",
+  "author": "Rogelio Negrete (Weffe)",
+  "sideEffects": false,
   "version": "0.1.1",
   "main": "dist/index.js",
   "module": "dist/shopify-checkout-step-manager.esm.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "keywords": [
+    "shopify",
+    "shopify checkout"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Weffe/shopify-checkout-step-manager"
+  },
+  "bugs": {
+    "url": "https://github.com/Weffe/shopify-checkout-step-manager/issues"
+  },
+  "homepage": "https://github.com/Weffe/shopify-checkout-step-manager",
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
