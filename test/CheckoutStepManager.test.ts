@@ -1,6 +1,7 @@
 import { CheckoutStepManager } from '../src';
-import { defaultOptions, IOptions } from '../src/CheckoutStepManager/options';
-import { CheckoutStep, CheckoutPage } from '../src/CheckoutStepManager/enums';
+import { defaultOptions } from '../src/shared/defaultOptions';
+import { IOptions } from '../src/shared/types';
+import { CheckoutStep, CheckoutPage } from '../src/shared/enums';
 
 describe('Testing Instance Creation', () => {
     it('should create an instance properly', () => {
@@ -23,11 +24,11 @@ describe('Testing Instance Creation', () => {
 
     it('should create an instance with custom options', () => {
         const options: IOptions = {
-            useLogging: true,
+            debug: true,
         };
         const csm = new CheckoutStepManager(options);
 
-        expect(csm.useLogging).toBe(options.useLogging);
+        expect((csm as any)._options.debug).toBe(true);
     });
 });
 
