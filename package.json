@@ -52,5 +52,10 @@
   "dependencies": {
     "tiny-invariant": "^1.0.6",
     "tiny-warning": "^1.0.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^~/(.*)$": "<rootDir>/src/$1"
+    }
   }
 }

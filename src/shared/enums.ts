@@ -31,4 +31,6 @@ export enum PageEvent {
     PAGE_LOAD = 'page:load',
     /** This is triggered when the page is still the same, but sections have been “re-painted” (ie. the discount form is submitted). */
     PAGE_CHANGE = 'page:change',
+    /** This is a combination of the above events. Useful when you want to listen all the time. */
+    PAGE_LOAD_AND_CHANGE = 'page:load page:change',
 }

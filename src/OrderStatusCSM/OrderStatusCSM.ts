@@ -1,9 +1,9 @@
-import { IBaseCSM } from 'shared/types';
-import { EventManager } from 'EventManager';
-import { IOrderStatusModifiers } from 'EventTarget/types';
 import warning from 'tiny-warning';
+import { EventManager } from '../EventManager';
+import { IOrderStatusModifiers } from '../EventTarget/types';
+import { IBaseCSM } from '~/shared/types';
 
-interface IOrderStatusCSM extends IBaseCSM {
+export interface IOrderStatusCSM extends IBaseCSM {
     onCheckoutOnly: () => this;
     onOrderOnly: () => this;
 }

@@ -1,13 +1,13 @@
 import invariant from 'tiny-invariant';
-import { debug } from '../shared/logger';
+import { AnyizeType } from '../AnyizeCSM';
+import { IEventPageTarget, IEventStepTarget, IStepTargetModifiers, IPageTargetModifiers, IOrderStatusModifiers } from '../EventTarget/types';
+import { debug } from '~/shared/logger';
 import { 
     CheckoutPage, 
     CheckoutStep, 
     PageEvent,
-} from '../shared/enums';
-import { AnyizeType } from 'AnyizeCSM';
-import { IEventPageTarget, IEventStepTarget, IStepTargetModifiers, IPageTargetModifiers, IOrderStatusModifiers } from 'EventTarget/types';
-import { IOptions } from 'shared/types';
+} from '~/shared/enums';
+import { IOptions } from '~/shared/types';
 
 let prevPage: typeof window.Shopify.Checkout["page"];
 let prevStep: typeof window.Shopify.Checkout["step"];
@@ -90,10 +90,10 @@ export class EventManager {
             }
         }
 
-        window.addEventListener(PageEvent.PAGE_LOAD, handleAnyPageChange);
+        window.addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyPageChange);
 
         return () => {
-            window.removeEventListener(PageEvent.PAGE_LOAD, handleAnyPageChange);
+            window.removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyPageChange);
         }
     }
 
@@ -125,10 +125,10 @@ export class EventManager {
             }
         }
 
-        window.addEventListener(PageEvent.PAGE_LOAD, handleAnyStepChange);
+        window.addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyStepChange);
 
         return () => {
-            window.removeEventListener(PageEvent.PAGE_LOAD, handleAnyStepChange);
+            window.removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyStepChange);
         }
     }
 
@@ -169,10 +169,10 @@ export class EventManager {
             }
         }
 
-        window.addEventListener(PageEvent.PAGE_LOAD, handleSpecificStep);
+        window.addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificStep);
 
         return () => {
-            window.removeEventListener(PageEvent.PAGE_LOAD, handleSpecificStep);
+            window.removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificStep);
         }
     }
 
@@ -213,10 +213,10 @@ export class EventManager {
             }
         }  
 
-        window.addEventListener(PageEvent.PAGE_LOAD, handleSpecificPage);
+        window.addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificPage);
 
         return () => {
-            window.removeEventListener(PageEvent.PAGE_LOAD, handleSpecificPage);
+            window.removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificPage);
         }
     }
 
@@ -254,19 +254,18 @@ export class EventManager {
             if (OrderStatus) {
                 const isCheckoutOnly = Boolean(step) && Boolean(page);
 
-                if (modifiers.onCheckoutOnly && modifiers.onOrderOnly) {
+                if (isCheckoutOnly && modifiers.onCheckoutOnly && !modifiers.onOrderOnly) {
+                    this._trigger(callbacks, eventName);
+                }
+                else if (!isCheckoutOnly && modifiers.onOrderOnly && !modifiers.onCheckoutOnly) {
+                    this._trigger(callbacks, eventName);
+                }
+                else if (
+                    (modifiers.onCheckoutOnly && modifiers.onOrderOnly) 
+                    || (!modifiers.onCheckoutOnly && !modifiers.onOrderOnly)
+                ) {
                     // trigger on both versions of the Order Status page
                     // as a way without causing any unexpected effects
-                    this._trigger(callbacks, eventName);
-                }
-                else if (modifiers.onCheckoutOnly && isCheckoutOnly) {
-                    this._trigger(callbacks, eventName);
-                }
-                else if (modifiers.onOrderOnly && !isCheckoutOnly) {
-                    this._trigger(callbacks, eventName);
-                }
-                else {
-                    // trigger on both versions of the Order Status page
                     this._trigger(callbacks, eventName);
                 }
             }

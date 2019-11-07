@@ -1,5 +1,5 @@
-import { CheckoutPage, CheckoutStep } from '../shared/enums';
 import { IEventPageTarget, IEventStepTarget, IPageTargetModifiers, IStepTargetModifiers } from './types';
+import { CheckoutPage, CheckoutStep } from '~/shared/enums';
 
 export class EventTarget {
     public static forPage = (page: CheckoutPage, modifiers: IPageTargetModifiers): IEventPageTarget => ({
