@@ -28,6 +28,7 @@
     "test": "tsdx test",
     "lint": "tsdx lint --fix",
     "prettier": "prettier --write 'src/**/*.ts'",
+    "prerelease": "npm run test",
     "release": "standard-version"
   },
   "prettier": {

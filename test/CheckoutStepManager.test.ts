@@ -1,6 +1,6 @@
 import { CheckoutStepManager } from '../src';
-import { defaultOptions } from '~/shared/defaultOptions';
-import { IOptions } from '~/shared/types';
+import { defaultOptions } from '../src/shared/defaultOptions';
+import { IOptions } from '../src/shared/types';
 
 describe('Instance Creation', () => {
     it('should create an instance properly', () => {

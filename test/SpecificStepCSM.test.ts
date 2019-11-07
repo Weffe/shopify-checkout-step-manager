@@ -1,5 +1,5 @@
 import { CheckoutStepManager } from '../src';
-import { CheckoutStep, CheckoutPage } from '~/shared/enums';
+import { CheckoutStep, CheckoutPage } from '../src/shared/enums';
 import { SpecificStepCSM } from '../src/SpecificStepCSM';
 
 describe('Fluent Step Methods', () => {

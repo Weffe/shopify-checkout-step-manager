@@ -1,4 +1,4 @@
-import { CheckoutPage, CheckoutStep } from '~/shared/enums';
+import { CheckoutPage, CheckoutStep } from '../shared/enums';
 
 export interface IEventPageTarget {
     type: 'page';
