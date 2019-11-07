@@ -2,8 +2,8 @@ import warning from 'tiny-warning';
 import { EventManager } from '../EventManager';
 import { EventTarget } from '../EventTarget';
 import { IStepTargetModifiers } from '../EventTarget/types';
-import { IBaseSpecificCSM } from '~/shared/types';
-import { CheckoutStep, CheckoutPage } from '~/shared/enums';
+import { IBaseSpecificCSM } from '../shared/types';
+import { CheckoutStep, CheckoutPage } from '../shared/enums';
 
 export interface ISpecificStepCSM extends IBaseSpecificCSM {
     onAnyPage: () => this;

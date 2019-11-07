@@ -1,7 +1,7 @@
 import invariant from 'tiny-invariant';
 import { EventManager } from '../EventManager';
 import { AnyizeType } from './enums';
-import { IBaseCSM } from '~/shared/types';
+import { IBaseCSM } from '../shared/types';
 
 export interface IAnyizeCSM extends IBaseCSM {}
 

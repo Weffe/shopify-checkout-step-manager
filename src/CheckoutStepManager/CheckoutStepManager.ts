@@ -3,9 +3,9 @@ import { SpecificStepCSM } from '../SpecificStepCSM';
 import { SpecificPageCSM } from '../SpecificPageCSM';
 import { OrderStatusCSM } from '../OrderStatusCSM';
 import { EventManager } from '../EventManager';
-import { CheckoutStep, CheckoutPage } from '~/shared/enums';
-import { defaultOptions } from '~/shared/defaultOptions';
-import { IOptions } from '~/shared/types';
+import { CheckoutStep, CheckoutPage } from '../shared/enums';
+import { defaultOptions } from '../shared/defaultOptions';
+import { IOptions } from '../shared/types';
 
 /**
  *

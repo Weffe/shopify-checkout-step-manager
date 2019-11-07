@@ -1,5 +1,5 @@
 import { CheckoutStepManager } from '../src';
-import { PageEvent } from '~/shared/enums';
+import { PageEvent } from '../src/shared/enums';
 
 const mockShopify: Window['Shopify'] = {
     Checkout: {

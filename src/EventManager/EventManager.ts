@@ -1,13 +1,13 @@
 import invariant from 'tiny-invariant';
 import { AnyizeType } from '../AnyizeCSM';
 import { IEventPageTarget, IEventStepTarget, IStepTargetModifiers, IPageTargetModifiers, IOrderStatusModifiers } from '../EventTarget/types';
-import { debug } from '~/shared/logger';
+import { debug } from '../shared/logger';
 import { 
     CheckoutPage, 
     CheckoutStep, 
     PageEvent,
-} from '~/shared/enums';
-import { IOptions } from '~/shared/types';
+} from '../shared/enums';
+import { IOptions } from '../shared/types';
 
 let prevPage: typeof window.Shopify.Checkout["page"];
 let prevStep: typeof window.Shopify.Checkout["step"];
