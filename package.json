@@ -2,7 +2,7 @@
   "name": "shopify-checkout-step-manager",
   "author": "Rogelio Negrete (Weffe)",
   "sideEffects": false,
-  "version": "0.1.2",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "module": "dist/shopify-checkout-step-manager.esm.js",
   "types": "dist/index.d.ts",
@@ -26,7 +26,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint",
+    "lint": "tsdx lint --fix",
     "prettier": "prettier --write 'src/**/*.ts'",
     "release": "standard-version"
   },
@@ -45,8 +45,17 @@
     "@types/jest": "^24.0.19",
     "prettier": "^1.18.2",
     "standard-version": "^7.0.0",
-    "tsdx": "^0.10.5",
+    "tsdx": "^0.11.0",
     "tslib": "^1.10.0",
-    "typescript": "^3.7.0-beta"
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "tiny-invariant": "^1.0.6",
+    "tiny-warning": "^1.0.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^~/(.*)$": "<rootDir>/src/$1"
+    }
   }
 }
