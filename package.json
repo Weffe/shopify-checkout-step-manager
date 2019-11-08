@@ -50,7 +50,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.6.0",
     "@types/jest": "^24.0.19",
     "@types/jquery": "^2.0.54",
-    "jquery": "^2.2.0",
+    "jquery": "^3.4.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.18.2",
     "standard-version": "^7.0.0",
