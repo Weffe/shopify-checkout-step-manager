@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/Weffe/shopify-checkout-step-manager/compare/v1.2.0...v1.3.0) (2019-11-08)
+
+
+### Bug Fixes
+
+* fix issue with add/remove event listener to the wrong event name ([8fc1ab1](https://github.com/Weffe/shopify-checkout-step-manager/commit/8fc1ab14c9e07effdbbfa732f3964b27a4d1bf29))
+
 ## [1.2.0](https://github.com/Weffe/shopify-checkout-step-manager/compare/v1.1.0...v1.2.0) (2019-11-07)
 
 ## [1.1.0](https://github.com/Weffe/shopify-checkout-step-manager/compare/v1.0.0...v1.1.0) (2019-11-07)
