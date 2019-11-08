@@ -1,25 +1,28 @@
 import { PageEvent } from '../shared/enums';
 
-/**
- * Mimics jQuery's addEventListener by attaching multiple event
- * listeners if they are specificed by spaces. Also, normalizes
- * the event names by removing any colons in the event name.
- */
-
-type listener = Parameters<Window['addEventListener']>[1];
-
-export function addEventListener(type: PageEvent, listener: listener) {
-    const eventNames = type.split(' ').map((name) => name.replace(':', ''));
-
-    for (const eventName of eventNames) {
-        window.addEventListener(eventName, listener);
+export function eventListenerFactory(jQuery: JQueryStatic) {
+    function addEventListener(type: PageEvent, listener: Function) {
+        /**
+         * unfortunalety, need to cast to string and any as
+         * we can use Parameters<F> type to pull out the params
+         * for the overloaded .on() function because of this
+         * @see https://stackoverflow.com/questions/58773217/how-to-use-parameters-type-on-overloaded-functions
+         */
+        jQuery(document).on(type as string, listener as any);
     }
-}
 
-export function removeEventListener(type: PageEvent, listener: listener) {
-    const eventNames = type.split(' ').map((name) => name.replace(':', ''));
-
-    for (const eventName of eventNames) {
-        window.removeEventListener(eventName, listener);
+    function removeEventListener(type: PageEvent, listener: Function) {
+        /**
+         * unfortunalety, need to cast to string and any as
+         * we can use Parameters<F> type to pull out the params
+         * for the overloaded .on() function because of this
+         * @see https://stackoverflow.com/questions/58773217/how-to-use-parameters-type-on-overloaded-functions
+         */
+        jQuery(document).off(type as string, listener as any);
     }
+
+    return {
+        addEventListener,
+        removeEventListener,
+    };
 }

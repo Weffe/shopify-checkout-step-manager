@@ -1,6 +1,6 @@
 import invariant from 'tiny-invariant';
 import { AnyizeType } from '../AnyizeCSM';
-import { addEventListener, removeEventListener } from './eventListener'
+import { eventListenerFactory } from './eventListener'
 import { IEventPageTarget, IEventStepTarget, IStepTargetModifiers, IPageTargetModifiers, IOrderStatusModifiers } from '../EventTarget/types';
 import { debug } from '../shared/logger';
 import { 
@@ -18,9 +18,18 @@ let prevStep: typeof window.Shopify.Checkout["step"];
  */
 export class EventManager {
     private _debug: boolean;
+    private _addEventListener: ReturnType<typeof eventListenerFactory>["addEventListener"];
+    private _removeEventListener: ReturnType<typeof eventListenerFactory>["removeEventListener"];
 
     public constructor(options: IOptions) {
         this._debug = options.debug;
+        const {
+            addEventListener,
+            removeEventListener
+        } = eventListenerFactory(options.jQuery)
+
+        this._addEventListener = addEventListener;
+        this._removeEventListener = removeEventListener;
     }
 
     private _trigger = (callbacks: Function[], eventName: string) => {
@@ -56,10 +65,10 @@ export class EventManager {
             this._trigger(callbacks, eventName);
         }
 
-        addEventListener(PageEvent.PAGE_CHANGE, handleAnyRepaint);
+        this._addEventListener(PageEvent.PAGE_CHANGE, handleAnyRepaint);
 
         return () => {
-            removeEventListener(PageEvent.PAGE_CHANGE, handleAnyRepaint);
+            this._removeEventListener(PageEvent.PAGE_CHANGE, handleAnyRepaint);
         }
     }
 
@@ -91,10 +100,10 @@ export class EventManager {
             }
         }
 
-        addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyPageChange);
+        this._addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyPageChange);
 
         return () => {
-            removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyPageChange);
+            this._removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyPageChange);
         }
     }
 
@@ -126,10 +135,10 @@ export class EventManager {
             }
         }
 
-        addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyStepChange);
+        this._addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyStepChange);
 
         return () => {
-            removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyStepChange);
+            this._removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyStepChange);
         }
     }
 
@@ -170,10 +179,10 @@ export class EventManager {
             }
         }
 
-        addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificStep);
+        this._addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificStep);
 
         return () => {
-            removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificStep);
+            this._removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificStep);
         }
     }
 
@@ -214,10 +223,10 @@ export class EventManager {
             }
         }  
 
-        addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificPage);
+        this._addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificPage);
 
         return () => {
-            removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificPage);
+            this._removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificPage);
         }
     }
 
@@ -272,10 +281,10 @@ export class EventManager {
             }
         }  
 
-        addEventListener(PageEvent.PAGE_LOAD, handleOrderStatus);
+        this._addEventListener(PageEvent.PAGE_LOAD, handleOrderStatus);
 
         return () => {
-            removeEventListener(PageEvent.PAGE_LOAD, handleOrderStatus);
+            this._removeEventListener(PageEvent.PAGE_LOAD, handleOrderStatus);
         }
     }
 }

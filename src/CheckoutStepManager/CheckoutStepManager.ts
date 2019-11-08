@@ -25,7 +25,8 @@ export class CheckoutStepManager {
      * @param options {Object}
      */
     public constructor(options: IOptions = defaultOptions) {
-        this._eventManager = new EventManager(options);
+        const _options = { ...defaultOptions, ...options };
+        this._eventManager = new EventManager(_options);
     }
 
     //#region Fluent Methods
