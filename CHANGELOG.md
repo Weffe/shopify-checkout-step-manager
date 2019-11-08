@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/Weffe/shopify-checkout-step-manager/compare/v1.4.0...v1.5.0) (2019-11-08)
+
+
+### Features
+
+* add better debug information ([532cfec](https://github.com/Weffe/shopify-checkout-step-manager/commit/532cfecda84d3fd9848e6557a9aa0a1a6ea73e2c))
+
 ## [1.4.0](https://github.com/Weffe/shopify-checkout-step-manager/compare/v1.3.0...v1.4.0) (2019-11-08)
 
 
