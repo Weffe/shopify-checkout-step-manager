@@ -60,7 +60,7 @@ export class EventManager {
     }
 
     private _observeAnyRepaint = (callbacks: Function[]): Function => {
-        const eventName = 'Any Repaint';
+        const eventName = `(${PageEvent.PAGE_CHANGE}) Any Repaint`;
         const handleAnyRepaint = () => {
             this._trigger(callbacks, eventName);
         }
@@ -78,7 +78,7 @@ export class EventManager {
         /**
          * Only trigger callbacks on supported checkout page values
          */
-        const handleAnyPageChange = () => {
+        const handleAnyPageFactory = (eventType: string) => () => {
             const page = window.Shopify.Checkout.page?.toLowerCase();
 
             /**
@@ -96,24 +96,26 @@ export class EventManager {
                 )
             ) {
                 prevPage = page;
-                this._trigger(callbacks, `${eventName} for "${page}"`);
+                this._trigger(callbacks, `(${eventType}) ${eventName} for "${page}"`);
             }
         }
 
-        this._addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyPageChange);
+        const handleAnyPageLoad = handleAnyPageFactory(PageEvent.PAGE_LOAD);
+        const handleAnyPageChange = handleAnyPageFactory(PageEvent.PAGE_CHANGE);
+
+        this._addEventListener(PageEvent.PAGE_LOAD, handleAnyPageLoad);
+        this._addEventListener(PageEvent.PAGE_CHANGE, handleAnyPageChange);
 
         return () => {
-            this._removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyPageChange);
+            this._removeEventListener(PageEvent.PAGE_LOAD, handleAnyPageLoad);
+            this._removeEventListener(PageEvent.PAGE_CHANGE, handleAnyPageChange);
         }
     }
 
     private _observeAnyStepChange = (callbacks: Function[]): Function => {
         const eventName = 'Any Step Change';
 
-        /**
-         * Only trigger callbacks on supported checkout step values
-         */
-        const handleAnyStepChange = () => {
+        const handleAnyStepFactory = (eventType: string) => () => {
             const step = window.Shopify.Checkout.step?.toLowerCase();
 
             /**
@@ -131,24 +133,29 @@ export class EventManager {
                 )
             ) {
                 prevStep = step;
-                this._trigger(callbacks, `${eventName} for "${step}"`);
+                this._trigger(callbacks, `(${eventType}) ${eventName} for "${step}"`);
             }
         }
 
-        this._addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyStepChange);
+        const handleAnyStepLoad = handleAnyStepFactory(PageEvent.PAGE_LOAD);
+        const handleAnyStepChange = handleAnyStepFactory(PageEvent.PAGE_CHANGE);
+
+        this._addEventListener(PageEvent.PAGE_LOAD, handleAnyStepLoad);
+        this._addEventListener(PageEvent.PAGE_CHANGE, handleAnyStepChange);
 
         return () => {
-            this._removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyStepChange);
+            this._removeEventListener(PageEvent.PAGE_LOAD, handleAnyStepLoad);
+            this._removeEventListener(PageEvent.PAGE_CHANGE, handleAnyStepChange);
         }
     }
 
     private _observeSpecificStep = (forStep: CheckoutStep, callbacks: Function[], modifiers?: IStepTargetModifiers): Function => {
-        const eventName = `Only for ${forStep} step`;
+        const eventName = `Only for "${forStep}" step`;
         let removeWithAnyPageListener: Function | undefined;
         let removeWithAnyRepaintListener: Function | undefined;
         let removeWithSpecificPageListener: Function | undefined;
         
-        const handleSpecificStep = () => {
+        const handleSpecificStepFactory = (eventType: string) => () => {
             const step = window.Shopify.Checkout.step?.toLowerCase();
 
             if (step === forStep) {
@@ -170,7 +177,7 @@ export class EventManager {
                 }
 
                 // always trigger the callbacks for the first time
-                this._trigger(callbacks, eventName);
+                this._trigger(callbacks, `(${eventType}) ${eventName}`);
             }
             else {
                 removeWithAnyPageListener?.();
@@ -179,20 +186,25 @@ export class EventManager {
             }
         }
 
-        this._addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificStep);
+        const handleSpecificStepLoad = handleSpecificStepFactory(PageEvent.PAGE_LOAD);
+        const handleSpecificStepChange = handleSpecificStepFactory(PageEvent.PAGE_CHANGE);
+
+        this._addEventListener(PageEvent.PAGE_LOAD, handleSpecificStepLoad);
+        this._addEventListener(PageEvent.PAGE_CHANGE, handleSpecificStepChange);
 
         return () => {
-            this._removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificStep);
+            this._removeEventListener(PageEvent.PAGE_LOAD, handleSpecificStepLoad);
+            this._removeEventListener(PageEvent.PAGE_CHANGE, handleSpecificStepChange);
         }
     }
 
     private _observeSpecificPage = (forPage: CheckoutPage, callbacks: Function[], modifiers?: IPageTargetModifiers): Function => {
-        const eventName = `Only for ${forPage} page`;
+        const eventName = `Only for "${forPage}" page`;
         let removeWithAnyStepListener: Function | undefined;
         let removeWithAnyRepaintListener: Function | undefined;
         let removeWithSpecificStepListener: Function | undefined;
 
-        const handleSpecificPage = () => {
+        const handleSpecificPageFactory = (eventType: string) => () => {
             const page = window.Shopify.Checkout.page?.toLowerCase();
 
             if (page === forPage) {
@@ -214,7 +226,7 @@ export class EventManager {
                 }
                     
                 // always trigger the callbacks for the first time
-                this._trigger(callbacks, eventName);
+                this._trigger(callbacks, `(${eventType}) ${eventName}`);
             }
             else {
                 removeWithAnyStepListener?.();
@@ -223,10 +235,15 @@ export class EventManager {
             }
         }  
 
-        this._addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificPage);
-
+        const handleSpecificPageChange = handleSpecificPageFactory(PageEvent.PAGE_CHANGE);
+        const handleSpecificPageLoad = handleSpecificPageFactory(PageEvent.PAGE_LOAD);
+        
+        this._addEventListener(PageEvent.PAGE_LOAD, handleSpecificPageLoad);
+        this._addEventListener(PageEvent.PAGE_CHANGE, handleSpecificPageChange);
+        
         return () => {
-            this._removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificPage);
+            this._removeEventListener(PageEvent.PAGE_LOAD, handleSpecificPageLoad);
+            this._removeEventListener(PageEvent.PAGE_CHANGE, handleSpecificPageChange);
         }
     }
 
@@ -276,7 +293,7 @@ export class EventManager {
                 ) {
                     // trigger on both versions of the Order Status page
                     // as a way without causing any unexpected effects
-                    this._trigger(callbacks, eventName);
+                    this._trigger(callbacks, `(${PageEvent.PAGE_LOAD}) ${eventName}`);
                 }
             }
         }  
@@ -287,4 +304,4 @@ export class EventManager {
             this._removeEventListener(PageEvent.PAGE_LOAD, handleOrderStatus);
         }
     }
-}
+};
