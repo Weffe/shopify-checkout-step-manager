@@ -1,5 +1,6 @@
 import invariant from 'tiny-invariant';
 import { AnyizeType } from '../AnyizeCSM';
+import { addEventListener, removeEventListener } from './eventListener'
 import { IEventPageTarget, IEventStepTarget, IStepTargetModifiers, IPageTargetModifiers, IOrderStatusModifiers } from '../EventTarget/types';
 import { debug } from '../shared/logger';
 import { 
@@ -55,10 +56,10 @@ export class EventManager {
             this._trigger(callbacks, eventName);
         }
 
-        window.addEventListener(PageEvent.PAGE_CHANGE, handleAnyRepaint);
+        addEventListener(PageEvent.PAGE_CHANGE, handleAnyRepaint);
 
         return () => {
-            window.removeEventListener(PageEvent.PAGE_CHANGE, handleAnyRepaint);
+            removeEventListener(PageEvent.PAGE_CHANGE, handleAnyRepaint);
         }
     }
 
@@ -90,10 +91,10 @@ export class EventManager {
             }
         }
 
-        window.addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyPageChange);
+        addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyPageChange);
 
         return () => {
-            window.removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyPageChange);
+            removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyPageChange);
         }
     }
 
@@ -125,10 +126,10 @@ export class EventManager {
             }
         }
 
-        window.addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyStepChange);
+        addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyStepChange);
 
         return () => {
-            window.removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyStepChange);
+            removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleAnyStepChange);
         }
     }
 
@@ -169,10 +170,10 @@ export class EventManager {
             }
         }
 
-        window.addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificStep);
+        addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificStep);
 
         return () => {
-            window.removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificStep);
+            removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificStep);
         }
     }
 
@@ -213,10 +214,10 @@ export class EventManager {
             }
         }  
 
-        window.addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificPage);
+        addEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificPage);
 
         return () => {
-            window.removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificPage);
+            removeEventListener(PageEvent.PAGE_LOAD_AND_CHANGE, handleSpecificPage);
         }
     }
 
@@ -271,10 +272,10 @@ export class EventManager {
             }
         }  
 
-        window.addEventListener(PageEvent.PAGE_LOAD, handleOrderStatus);
+        addEventListener(PageEvent.PAGE_LOAD, handleOrderStatus);
 
         return () => {
-            window.removeEventListener(PageEvent.PAGE_LOAD, handleOrderStatus);
+            removeEventListener(PageEvent.PAGE_LOAD, handleOrderStatus);
         }
     }
 }
