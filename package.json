@@ -2,7 +2,7 @@
   "name": "shopify-checkout-step-manager",
   "author": "Rogelio Negrete (Weffe)",
   "sideEffects": false,
-  "version": "1.3.0",
+  "version": "1.4.0",
   "main": "dist/index.js",
   "module": "dist/checkoutstepmanager.esm.js",
   "browser": "dist/checkoutstepmanager.umd.production.min.js",
