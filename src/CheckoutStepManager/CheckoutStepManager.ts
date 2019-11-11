@@ -66,7 +66,7 @@ export class CheckoutStepManager {
         return new SpecificStepCSM(CheckoutStep.SHIPPING_METHOD, this._eventManager);
     };
 
-    public forPaymentMethodstep = () => {
+    public forPaymentMethodStep = () => {
         return new SpecificStepCSM(CheckoutStep.PAYMENT_METHOD, this._eventManager);
     };
 

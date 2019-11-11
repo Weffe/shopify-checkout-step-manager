@@ -16,7 +16,7 @@ describe('Fluent Step Methods', () => {
     });
 
     it(`should set the step to ${CheckoutStep.PAYMENT_METHOD}`, () => {
-        const specificCSM = csm.forPaymentMethodstep();
+        const specificCSM = csm.forPaymentMethodStep();
 
         expect(specificCSM['_step']).toBe(CheckoutStep.PAYMENT_METHOD);
     });
