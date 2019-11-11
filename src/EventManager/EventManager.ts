@@ -21,7 +21,7 @@ export class EventManager {
     private _addEventListener: ReturnType<typeof eventListenerFactory>["addEventListener"];
     private _removeEventListener: ReturnType<typeof eventListenerFactory>["removeEventListener"];
 
-    public constructor(options: IOptions) {
+    public constructor(options: Required<IOptions>) {
         this._debug = options.debug;
         const {
             addEventListener,
@@ -78,7 +78,7 @@ export class EventManager {
         /**
          * Only trigger callbacks on supported checkout page values
          */
-        const handleAnyPageFactory = (eventType: string) => () => {
+        const handleAnyPageFactory = (eventType: PageEvent) => () => {
             const page = window.Shopify.Checkout.page?.toLowerCase();
 
             /**
@@ -115,7 +115,7 @@ export class EventManager {
     private _observeAnyStepChange = (callbacks: Function[]): Function => {
         const eventName = 'Any Step Change';
 
-        const handleAnyStepFactory = (eventType: string) => () => {
+        const handleAnyStepFactory = (eventType: PageEvent) => () => {
             const step = window.Shopify.Checkout.step?.toLowerCase();
 
             /**
@@ -155,29 +155,36 @@ export class EventManager {
         let removeWithAnyRepaintListener: Function | undefined;
         let removeWithSpecificPageListener: Function | undefined;
         
-        const handleSpecificStepFactory = (eventType: string) => () => {
+        const handleSpecificStepFactory = (eventType: PageEvent) => () => {
             const step = window.Shopify.Checkout.step?.toLowerCase();
 
             if (step === forStep) {
-                if (modifiers?.withAnyRepaint) {
-                    removeWithAnyRepaintListener = this._observeAnyRepaint(callbacks);
-                }
-
-                /**
-                 * Always prioritize with Any Page because there's
-                 * no need to have a Specific Page listener when
-                 * the callbacks are going to be triggered every
-                 * on page change.
+                /** 
+                 * Only add additional listeners and trigger callbacks on page:load.
+                 * We use the page:change only for removing additional listeners
+                 * that were created from modifiers when the step changes.
                  */
-                if (modifiers?.withAnyPage) {
-                    removeWithAnyPageListener = this._observeAnyPageChange(callbacks);
-                }
-                else if (modifiers?.withSpecificPage) {
-                    removeWithSpecificPageListener = this._observeSpecificPage(modifiers.withSpecificPage, callbacks)
-                }
+                if (eventType === PageEvent.PAGE_LOAD) {
+                    if (modifiers?.withAnyRepaint) {
+                        removeWithAnyRepaintListener = this._observeAnyRepaint(callbacks);
+                    }
 
-                // always trigger the callbacks for the first time
-                this._trigger(callbacks, `(${eventType}) ${eventName}`);
+                    /**
+                     * Always prioritize with Any Page because there's
+                     * no need to have a Specific Page listener when
+                     * the callbacks are going to be triggered every
+                     * on page change.
+                     */
+                    if (modifiers?.withAnyPage) {
+                        removeWithAnyPageListener = this._observeAnyPageChange(callbacks);
+                    }
+                    else if (modifiers?.withSpecificPage) {
+                        removeWithSpecificPageListener = this._observeSpecificPage(modifiers.withSpecificPage, callbacks)
+                    }
+
+                    // always trigger the callbacks for the first time
+                    this._trigger(callbacks, `(${eventType}) ${eventName}`);
+                }
             }
             else {
                 removeWithAnyPageListener?.();
@@ -204,29 +211,36 @@ export class EventManager {
         let removeWithAnyRepaintListener: Function | undefined;
         let removeWithSpecificStepListener: Function | undefined;
 
-        const handleSpecificPageFactory = (eventType: string) => () => {
+        const handleSpecificPageFactory = (eventType: PageEvent) => () => {
             const page = window.Shopify.Checkout.page?.toLowerCase();
 
             if (page === forPage) {
-                if (modifiers?.withAnyRepaint) {
-                    removeWithAnyRepaintListener = this._observeAnyRepaint(callbacks);
-                }
-
-                /**
-                 * Always prioritize with Any Step because there's
-                 * no need to have a Specific Step listener when
-                 * the callbacks are going to be triggered every
-                 * on step change.
+                /** 
+                 * Only add additional listeners and trigger callbacks on page:load.
+                 * We use the page:change only for removing additional listeners
+                 * that were created from modifiers when the step changes.
                  */
-                if (modifiers?.withAnyStep) {
-                    removeWithAnyStepListener = this._observeAnyStepChange(callbacks);
+                if (eventType === PageEvent.PAGE_LOAD) {
+                    if (modifiers?.withAnyRepaint) {
+                        removeWithAnyRepaintListener = this._observeAnyRepaint(callbacks);
+                    }
+
+                    /**
+                     * Always prioritize with Any Step because there's
+                     * no need to have a Specific Step listener when
+                     * the callbacks are going to be triggered every
+                     * on step change.
+                     */
+                    if (modifiers?.withAnyStep) {
+                        removeWithAnyStepListener = this._observeAnyStepChange(callbacks);
+                    }
+                    else if (modifiers?.withSpecificStep) {
+                        removeWithSpecificStepListener = this._observeSpecificStep(modifiers.withSpecificStep, callbacks)
+                    }
+                        
+                    // always trigger the callbacks for the first time
+                    this._trigger(callbacks, `(${eventType}) ${eventName}`);
                 }
-                else if (modifiers?.withSpecificStep) {
-                    removeWithSpecificStepListener = this._observeSpecificStep(modifiers.withSpecificStep, callbacks)
-                }
-                    
-                // always trigger the callbacks for the first time
-                this._trigger(callbacks, `(${eventType}) ${eventName}`);
             }
             else {
                 removeWithAnyStepListener?.();
