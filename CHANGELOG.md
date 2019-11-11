@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/Weffe/shopify-checkout-step-manager/compare/v1.5.0...v2.0.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* fix issue with config options for jQuery ([2635946](https://github.com/Weffe/shopify-checkout-step-manager/commit/2635946ee1ada78dc5d749ca7123eee7831dc042))
+
 ## [1.5.0](https://github.com/Weffe/shopify-checkout-step-manager/compare/v1.4.0...v1.5.0) (2019-11-08)
 
 
