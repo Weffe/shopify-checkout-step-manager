@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[29],{163:function(a){a.exports=JSON.parse('{"allTagsPath":"/shopify-checkout-step-manager/blog/tags","slug":"hola","name":"hola","count":1,"permalink":"/shopify-checkout-step-manager/blog/tags/hola"}')}}]);
