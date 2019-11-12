@@ -10,21 +10,17 @@ module.exports = {
     tagline: 'Easily execute code during Shopify Checkout',
     url: 'https://weffe.github.io',
     baseUrl: '/shopify-checkout-step-manager/',
-    favicon: 'img/favicon.ico',
+    favicon: 'img/shopify-favicon.png',
     organizationName: 'Weffe', // Usually your GitHub org/user name.
     projectName: 'shopify-checkout-step-manager', // Usually your repo name.
     themeConfig: {
         navbar: {
             title: 'Shopify Checkout Step Manager',
-            logo: {
-                alt: 'Shopify Checkout Step Manager Logo',
-                src: 'img/logo.svg',
-            },
             links: [
                 { to: 'docs/doc1', label: 'Docs', position: 'left' },
                 { to: 'blog', label: 'Blog', position: 'left' },
                 {
-                    href: 'https://weffe.github.io/shopify-checkout-step-manager',
+                    href: 'https://github.com/Weffe/shopify-checkout-step-manager',
                     label: 'GitHub',
                     position: 'right',
                 },
