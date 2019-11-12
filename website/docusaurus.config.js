@@ -8,7 +8,7 @@
 module.exports = {
     title: 'Shopify Checkout Step Manager',
     tagline: 'Easily execute code during Shopify Checkout',
-    url: 'https://weffe.github.io/shopify-checkout-step-manager',
+    url: 'https://weffe.github.io',
     baseUrl: '/shopify-checkout-step-manager/',
     favicon: 'img/favicon.ico',
     organizationName: 'Weffe', // Usually your GitHub org/user name.
