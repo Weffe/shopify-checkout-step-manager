@@ -496,15 +496,15 @@
       "css": [
         {
           "file": "main.890859af.css",
-          "hash": "a67ac1c165e78b4fbcb0",
+          "hash": "83d880cbe60814c26aef",
           "publicPath": "/shopify-checkout-step-manager/main.890859af.css"
         }
       ],
       "js": [
         {
-          "file": "main.4787e790.js",
-          "hash": "a67ac1c165e78b4fbcb0",
-          "publicPath": "/shopify-checkout-step-manager/main.4787e790.js"
+          "file": "main.e80109de.js",
+          "hash": "83d880cbe60814c26aef",
+          "publicPath": "/shopify-checkout-step-manager/main.e80109de.js"
         }
       ]
     },
