@@ -25,6 +25,10 @@ csm.forShowPage()
    .execute(callbackA)
 ```
 
+## Documentation
+
+[Visit the online docs here](https://weffe.github.io/shopify-checkout-step-manager)
+
 ## Quick Docs
 
 ### Jquery Peer Dependency
