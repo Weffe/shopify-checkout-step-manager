@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{147:function(s){s.exports=JSON.parse('{"allTagsPath":"/shopify-checkout-step-manager/blog/tags","slug":"docusaurus","name":"docusaurus","count":3,"permalink":"/shopify-checkout-step-manager/blog/tags/docusaurus"}')}}]);
