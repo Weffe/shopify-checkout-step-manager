@@ -11,7 +11,8 @@ jobs:
               uses: actions/checkout@master
 
             - name: Install and Build
-              run: npm ci --prefix website
+              run: |
+                  npm ci --prefix website
                   npm run build --prefix website
 
             - name: Deploy
