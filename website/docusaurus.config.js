@@ -15,9 +15,9 @@ module.exports = {
     projectName: 'shopify-checkout-step-manager', // Usually your repo name.
     themeConfig: {
         navbar: {
-            title: 'My Site',
+            title: 'Shopify Checkout Step Manager',
             logo: {
-                alt: 'My Site Logo',
+                alt: 'Shopify Checkout Step Manager Logo',
                 src: 'img/logo.svg',
             },
             links: [
