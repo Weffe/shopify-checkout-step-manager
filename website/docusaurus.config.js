@@ -17,8 +17,9 @@ module.exports = {
         navbar: {
             title: 'Shopify Checkout Step Manager',
             links: [
-                { to: 'docs/doc1', label: 'Docs', position: 'left' },
-                { to: 'blog', label: 'Blog', position: 'left' },
+                { to: 'docs/welcome/getting-started', label: 'Getting Started', position: 'left' },
+                { to: 'docs/guides/example', label: 'Guides', position: 'left' },
+                { to: 'docs/api/CheckoutStepManager', label: 'Api', position: 'left' },
                 {
                     href: 'https://github.com/Weffe/shopify-checkout-step-manager',
                     label: 'GitHub',
@@ -30,38 +31,19 @@ module.exports = {
             style: 'dark',
             links: [
                 {
-                    title: 'Docs',
+                    title: 'Quick Links',
                     items: [
                         {
-                            label: 'Docs',
-                            to: 'docs/doc1',
+                            label: 'Getting Started',
+                            to: 'docs/getting_started',
                         },
-                    ],
-                },
-                {
-                    title: 'Community',
-                    items: [
                         {
-                            label: 'Discord',
-                            href: 'https://discordapp.com/invite/docusaurus',
-                        },
-                    ],
-                },
-                {
-                    title: 'Social',
-                    items: [
-                        {
-                            label: 'Blog',
-                            to: 'blog',
+                            label: 'Guides',
+                            to: 'docs/guides/setup',
                         },
                     ],
                 },
             ],
-            logo: {
-                alt: 'Facebook Open Source Logo',
-                src: 'https://docusaurus.io/img/oss_logo.png',
-            },
-            copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc. Built with Docusaurus.`,
         },
     },
     presets: [
@@ -70,6 +52,7 @@ module.exports = {
             {
                 docs: {
                     sidebarPath: require.resolve('./sidebars.js'),
+                    showLastUpdateTime: true,
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),

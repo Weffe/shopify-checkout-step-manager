@@ -5,9 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+const apiIds = ['CheckoutStepManager', 'Options', 'defaultOptions'].map((id) => 'api/' + id);
+const welcomeIds = ['getting-started', 'usage'].map((id) => 'welcome/' + id);
+const guideIds = [].map((id) => 'guide/' + id);
+
 module.exports = {
-  docs: {
-    Docusaurus: ['doc1', 'doc2', 'doc3'],
-    Features: ['mdx'],
-  },
+    docs: {
+        Welcome: welcomeIds,
+        Guide: guideIds,
+        Api: apiIds,
+    },
 };
