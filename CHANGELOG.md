@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/Weffe/shopify-checkout-step-manager/compare/v3.0.0...v4.0.0) (2019-11-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* removal of exported enums (CheckoutPage and CheckoutStep) could cause issues for you if you were using them. Please remove any reference to them. The decision to remove this was based on the fact that they weren't used outside of this package.
+
+### Features
+
+* remove export enums ([90362fe](https://github.com/Weffe/shopify-checkout-step-manager/commit/90362fe0d747ff1628a6f463167bb60554eeed3f))
+
 ## [3.0.0](https://github.com/Weffe/shopify-checkout-step-manager/compare/v2.1.0...v3.0.0) (2019-11-11)
 
 
