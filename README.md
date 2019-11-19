@@ -1,48 +1,42 @@
 # Shopify Checkout Step Manager
 
-Easily manage when to execute code during Shopify Checkout steps.
+Easily execute code during Shopify Checkout.
 
-## Get Started
+## Getting Started
 
-```
+Let's get you all set up!
+
+## Install
+
+First install the package.
+
+### Using npm
+
+`npm i shopify-checkout-step-manager`
+
+### Using yarn
+
+`yarn add shopify-checkout-step-manager`
+
+## Use in your project
+
+Once installed, you can then import and start using it in your project:
+
+```js
 import { CheckoutStepManager } from 'shopify-checkout-step-manager';
 
 const csm = new CheckoutStepManager();
 
-csm.forAnyRepaint().execute(() => {
-    console.log('Something just got repainted!');
-});
+function runOnRepaint() {
+    console.log('There was a repaint!');
+}
 
-csm.forContactInformationStep().execute(callbackA, callbackB, callbackC);
+const removeListener = csm.onAnyRepaint().execute(runOnRepaint);
 
-/**
- * In plain words,
- * execute callbackA only for the 'show' page on any repaint AND on any step.
- */
-csm.forShowPage()
-   .onAnyRepaint()
-   .onAnyStep()
-   .execute(callbackA)
+// remove the repaint listener after 3 seconds
+setTimeout(removeListener, 3000);
 ```
 
 ## Documentation
 
 [Visit the online docs here](https://weffe.github.io/shopify-checkout-step-manager)
-
-## Quick Docs
-
-### Jquery Peer Dependency
-
-It's required to use jQuery as a peer dependency in order for this library to hook into the special "page" events that the Shopify's checkout script emits.
-
-You can choose to `npm i jquery` and then import it in your app.
-
-Or, you can manually set the jquery instance this library uses through the options:
-
-`const csm = new CheckoutStepManager({ jQuery: window.$ });`
-
-### Browser Script usage
-
-This library emits a `umd` bundle that can be used if you want to include this library via a script tag.
-
-This library is then exposed as `window.CheckoutStepManager`.
