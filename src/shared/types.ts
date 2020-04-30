@@ -4,7 +4,7 @@ export interface IOptions {
      * development or debugging. But should be turned off in production.
      */
     debug?: boolean;
-    jQuery?: JQueryStatic;
+    jQuery: JQueryStatic;
 }
 
 export interface IBaseCSM {

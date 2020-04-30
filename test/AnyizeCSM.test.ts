@@ -1,11 +1,13 @@
 import { CheckoutStepManager } from '../src';
 import { AnyizeType } from '../src/AnyizeCSM';
 
+const mockJquery = {} as JQueryStatic;
+
 describe('forAny Fluent Methods', () => {
     let csm: CheckoutStepManager;
 
     beforeEach(() => {
-        csm = new CheckoutStepManager();
+        csm = new CheckoutStepManager({ jQuery: mockJquery });
     });
 
     it(`should set anyize type to "${AnyizeType.ANY_PAGE}"`, () => {
