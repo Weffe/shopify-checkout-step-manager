@@ -1,8 +1,7 @@
-# Shopify Checkout Step Manager
-
-Easily execute code during Shopify Checkout.
-
-## Getting Started
+---
+id: getting-started
+title: Getting Started
+---
 
 Let's get you all set up!
 
@@ -36,7 +35,3 @@ const removeListener = csm.onAnyRepaint().execute(runOnRepaint);
 // remove the repaint listener after 3 seconds
 setTimeout(removeListener, 3000);
 ```
-
-## Documentation
-
-[Visit the online docs here](https://weffe.github.io/shopify-checkout-step-manager)
