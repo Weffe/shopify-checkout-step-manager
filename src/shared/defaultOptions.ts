@@ -1,7 +1,5 @@
 import { IOptions } from '../shared/types';
-import $ from 'jquery';
 
-export const defaultOptions: Required<IOptions> = {
+export const defaultOptions: Partial<IOptions> = {
     debug: false,
-    jQuery: $,
 };

@@ -1,11 +1,13 @@
 import { CheckoutStepManager } from '../src';
 import { OrderStatusCSM } from '../src/OrderStatusCSM';
 
+const mockJquery = {} as JQueryStatic;
+
 describe('Order Status Fluent Methods', () => {
     let csm: CheckoutStepManager;
 
     beforeEach(() => {
-        csm = new CheckoutStepManager();
+        csm = new CheckoutStepManager({ jQuery: mockJquery });
     });
 
     it(`should create OrderStatus instance`, () => {

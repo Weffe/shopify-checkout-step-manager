@@ -2,11 +2,13 @@ import { CheckoutStepManager } from '../src';
 import { CheckoutStep, CheckoutPage } from '../src/shared/enums';
 import { SpecificStepCSM } from '../src/SpecificStepCSM';
 
+const mockJquery = {} as JQueryStatic;
+
 describe('Fluent Step Methods', () => {
     let csm: CheckoutStepManager;
 
     beforeEach(() => {
-        csm = new CheckoutStepManager();
+        csm = new CheckoutStepManager({ jQuery: mockJquery });
     });
 
     it(`should set the step to ${CheckoutStep.CONTACT_INFORMATION}`, () => {

@@ -18,11 +18,14 @@ let prevStep: typeof window.Shopify.Checkout["step"];
  */
 export class EventManager {
     private _debug: boolean;
+    // @ts-ignore - we ignore to stop TS complaining about unused variables here
+    private _jquery: JQueryStatic; // mainly used for internal debugging & testing purposes
     private _addEventListener: ReturnType<typeof eventListenerFactory>["addEventListener"];
     private _removeEventListener: ReturnType<typeof eventListenerFactory>["removeEventListener"];
 
     public constructor(options: Required<IOptions>) {
         this._debug = options.debug;
+        this._jquery = options.jQuery;
         const {
             addEventListener,
             removeEventListener

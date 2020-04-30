@@ -24,8 +24,8 @@ export class CheckoutStepManager {
      *
      * @param options {Object}
      */
-    public constructor(options: IOptions = defaultOptions) {
-        const _options = { ...defaultOptions, ...options };
+    public constructor(options: IOptions) {
+        const _options = { ...defaultOptions, ...options } as Required<IOptions>;
         this._eventManager = new EventManager(_options);
     }
 
